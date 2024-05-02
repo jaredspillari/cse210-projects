@@ -40,6 +40,6 @@ class Program
                 max = number;
             }
         }
-        Console.WriteLine($"The Max is :{max}")
+        Console.WriteLine($"The Max is :{max}");
         }
 }

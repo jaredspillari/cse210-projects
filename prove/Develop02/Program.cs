@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 class Program
 {
@@ -23,12 +24,11 @@ class Program
                 Console.WriteLine(question);
                 Console.WriteLine("Your response:");
                 string response = Console.ReadLine();
-                // add code to the user will be saved 
-                Console.WriteLine("Response saved.");
+                SaveResponse(response); // in line 48 can see how it will work      
                 break;
             case "2":
                 Console.WriteLine("You Chose To Display.");
-                // add code to display
+                DisplayJournal();
                 break;
             case "3":
                 Console.WriteLine("You Chose To Load.");
@@ -45,4 +45,41 @@ class Program
         }
         Console.WriteLine("Thanks for writing  today");
     }
+    static void SaveResponse(string response)
+    {
+        string filePath = "response.txt";
+        try
+        {
+        using(StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            writer.WriteLine(response);
+        }
+        //if work will be display Response saved
+        Console.WriteLine("Response saved.");
+        }
+        catch (Exception ex)
+        {
+            //if don't work will be display Response saved
+            Console.WriteLine($"Error saving response: {ex.Message}");
+        }
+    }
+    static void DisplayJournal()
+{
+    string filePath = "response.txt";
+    try
+    {
+        string[] responses = File.ReadAllLines(filePath);
+        Console.WriteLine("Journal Entries:");
+        foreach (string response in responses)
+        {
+            Console.WriteLine(response);
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error displaying journal: {ex.Message}");
+    }
+}
+
+
 }

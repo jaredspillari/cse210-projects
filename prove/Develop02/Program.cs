@@ -19,8 +19,12 @@ class Program
         switch (input)
         {
             case "1":
-                Console.WriteLine(generator.generateRandomQuestion());
-                //I need to add code to write 
+                string question = generator.generateRandomQuestion();
+                Console.WriteLine(question);
+                Console.WriteLine("Your response:");
+                string response = Console.ReadLine();
+                // add code to the user will be saved 
+                Console.WriteLine("Response saved.");
                 break;
             case "2":
                 Console.WriteLine("You Chose To Display.");

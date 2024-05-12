@@ -37,7 +37,7 @@ class Program
                 break;
             case "4":
                 Console.WriteLine("You Chose To Save.");
-                // add code to display
+                SaveJournal();
                 break;
             default:
                 Console.WriteLine("invalit Choise. Please try again");
@@ -85,19 +85,35 @@ class Program
     static void LoadJournal()
     {
     string filePath = "response.txt";
-    try
+    if(File.Exists(filePath))
     {
-        string[] responses = File.ReadAllLines(filePath);
-        Console.WriteLine("Journal Entries Loaded:");
-        foreach(string response in responses)
+        using (StreamReader reader = new StreamReader(filePath))
         {
-           Console.WriteLine(response);
+            string line;
+            while ((line= reader.ReadLine()) != null )
+            {
+                Console.WriteLine(line);
+            }
         }
-
+    }
+    else
+    {
+        Console.WriteLine("No responses found");
+    }
+    
+    }
+    static void SaveJournal()
+    {
+        string sourceFilePath = "response.txt";
+        string destinationFilePath = "journal_backup.txt";
+        try
+        {
+            File.Copy(sourceFilePath, destinationFilePath, true);
+            Console.WriteLine("Journal saved.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error displaying journal: {ex.Message}");
+            Console.WriteLine($"Error saving journal: {ex.Message}");
         }
     }
 }

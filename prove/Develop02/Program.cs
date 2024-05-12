@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.IO;
 
 class Program
@@ -32,7 +33,7 @@ class Program
                 break;
             case "3":
                 Console.WriteLine("You Chose To Load.");
-                // add code to Load
+                LoadJournal(); //code to Load
                 break;
             case "4":
                 Console.WriteLine("You Chose To Save.");
@@ -64,7 +65,8 @@ class Program
         }
     }
     static void DisplayJournal()
-{
+
+    {
     string filePath = "response.txt";
     try
     {
@@ -79,7 +81,23 @@ class Program
     {
         Console.WriteLine($"Error displaying journal: {ex.Message}");
     }
-}
+    }
+    static void LoadJournal()
+    {
+    string filePath = "response.txt";
+    try
+    {
+        string[] responses = File.ReadAllLines(filePath);
+        Console.WriteLine("Journal Entries Loaded:");
+        foreach(string response in responses)
+        {
+           Console.WriteLine(response);
+        }
 
-
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error displaying journal: {ex.Message}");
+        }
+    }
 }
